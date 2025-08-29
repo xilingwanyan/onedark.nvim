@@ -935,6 +935,120 @@ function M.setup()
         hl.plugins.navic["NavicIcons" .. kind] = { fg = color }
     end
 
+    -- ========== 您的自定义颜色定义 ==========
+    local my_colors = {
+        operator = "#4FC3F7",        -- 运算符和点
+        string = "#8BC34A",          -- 字符串
+        float = "#89C049",           -- 浮点数
+        boolean = "#FF6060",         -- Boolean
+        integer = "#8BC34A",         -- 整数
+        bracket = "#E8E1DD",         -- 括号
+        comment = "#BDBDBD",         -- 注释
+        keyword = "#FF6060",         -- 关键字
+        annotation = "#AFB42B",      -- 注解
+        function_name = "#64B5F6",   -- 函数名和类型
+        parameter = "#BA68C8",       -- 参数
+        variable = "#E667CB",        -- 变量
+        field = "#F0BE4B",           -- 字段
+    }
+
+    -- ========== 应用到 Treesitter 高亮 ==========
+    
+    -- 运算符和点
+    hl.treesitter["@operator"] = { fg = my_colors.operator }
+    hl.treesitter["@punctuation.delimiter"] = { fg = my_colors.operator }  -- 点号等分隔符
+    
+    -- 字符串
+    hl.treesitter["@string"] = { fg = my_colors.string }
+    hl.treesitter["@string.regex"] = { fg = my_colors.string }
+    hl.treesitter["@string.escape"] = { fg = my_colors.string }
+    
+    -- 数字
+    hl.treesitter["@number"] = { fg = my_colors.integer }      -- 整数
+    hl.treesitter["@number.float"] = { fg = my_colors.float }  -- 浮点数
+    
+    -- Boolean
+    hl.treesitter["@boolean"] = { fg = my_colors.boolean }
+    
+    -- 括号和标点
+    hl.treesitter["@punctuation.bracket"] = { fg = my_colors.bracket }
+    hl.treesitter["@punctuation.special"] = { fg = my_colors.bracket }
+    
+    -- 注释
+    hl.treesitter["@comment"] = { fg = my_colors.comment, italic = true }
+    hl.treesitter["@comment.documentation"] = { fg = my_colors.comment, italic = true }
+    
+    -- 关键字
+    hl.treesitter["@keyword"] = { fg = my_colors.keyword }
+    hl.treesitter["@keyword.function"] = { fg = my_colors.keyword }      -- fun
+    hl.treesitter["@keyword.operator"] = { fg = my_colors.keyword }      -- in, is, as
+    hl.treesitter["@keyword.return"] = { fg = my_colors.keyword }        -- return
+    hl.treesitter["@keyword.import"] = { fg = my_colors.keyword }        -- import
+    hl.treesitter["@keyword.exception"] = { fg = my_colors.keyword }     -- try, catch
+    hl.treesitter["@keyword.repeat"] = { fg = my_colors.keyword }        -- while, for
+    hl.treesitter["@keyword.conditional"] = { fg = my_colors.keyword }   -- if, else
+    
+    -- 注解
+    hl.treesitter["@annotation"] = { fg = my_colors.annotation }
+    
+    -- 函数名和类型
+    hl.treesitter["@function"] = { fg = my_colors.function_name }        -- 函数名
+    hl.treesitter["@function.call"] = { fg = my_colors.function_name }   -- 函数调用
+    hl.treesitter["@function.builtin"] = { fg = my_colors.function_name }-- 内置函数
+    hl.treesitter["@type"] = { fg = my_colors.function_name }            -- 类型
+    hl.treesitter["@type.builtin"] = { fg = my_colors.function_name }    -- 内置类型
+    hl.treesitter["@type.definition"] = { fg = my_colors.function_name } -- 类型定义
+    
+    -- 参数
+    hl.treesitter["@parameter"] = { fg = my_colors.parameter }
+    hl.treesitter["@parameter.reference"] = { fg = my_colors.parameter }
+    
+    -- 变量
+    hl.treesitter["@variable"] = { fg = my_colors.variable }
+    hl.treesitter["@variable.builtin"] = { fg = my_colors.variable }
+    
+    -- 字段和属性
+    hl.treesitter["@field"] = { fg = my_colors.field }
+    hl.treesitter["@property"] = { fg = my_colors.field }
+
+    -- ========== 应用到基础语法高亮 ==========
+    -- 运算符
+    hl.syntax["Operator"] = { fg = my_colors.operator }
+    
+    -- 字符串
+    hl.syntax["String"] = { fg = my_colors.string }
+    
+    -- 数字
+    hl.syntax["Number"] = { fg = my_colors.integer }
+    hl.syntax["Float"] = { fg = my_colors.float }
+    
+    -- Boolean
+    hl.syntax["Boolean"] = { fg = my_colors.boolean }
+    
+    -- 注释
+    hl.syntax["Comment"] = { fg = my_colors.comment, italic = true }
+    
+    -- 关键字
+    hl.syntax["Keyword"] = { fg = my_colors.keyword }
+    hl.syntax["Conditional"] = { fg = my_colors.keyword }  -- if, else
+    hl.syntax["Repeat"] = { fg = my_colors.keyword }       -- while, for
+    hl.syntax["Label"] = { fg = my_colors.keyword }        -- case
+    hl.syntax["Exception"] = { fg = my_colors.keyword }    -- try, catch
+    hl.syntax["Include"] = { fg = my_colors.keyword }      -- import
+    hl.syntax["Define"] = { fg = my_colors.keyword }       -- define
+    hl.syntax["Macro"] = { fg = my_colors.keyword }        -- macro
+    hl.syntax["PreProc"] = { fg = my_colors.keyword }      -- preprocessor
+    
+    -- 函数
+    hl.syntax["Function"] = { fg = my_colors.function_name }
+    
+    -- 类型
+    hl.syntax["Type"] = { fg = my_colors.function_name }
+    hl.syntax["StorageClass"] = { fg = my_colors.keyword } -- static, final
+    
+    -- 标识符
+    hl.syntax["Identifier"] = { fg = my_colors.variable }
+
     vim_highlights(hl.common)
     vim_highlights(hl.syntax)
     vim_highlights(hl.treesitter)
