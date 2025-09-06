@@ -950,6 +950,7 @@ function M.setup()
         parameter = "#BA68C8",       -- 参数
         variable = "#E667CB",        -- 变量
         field = "#F0BE4B",           -- 字段
+        border = "#61afef",          -- 蓝色边框
     }
 
     -- ========== 应用到 Treesitter 高亮 ==========
@@ -1048,6 +1049,8 @@ function M.setup()
     
     -- 标识符
     hl.syntax["Identifier"] = { fg = my_colors.variable }
+    -- 其他
+    hl.syntax["FloatBorder"] = { fg = my_colors.border }  -- 新增：蓝色边框
 
     vim_highlights(hl.common)
     vim_highlights(hl.syntax)
